@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - Manas Flow</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff4d4d, #ff9933, #ffd633, #66cc66);
+      min-height: 100vh;
+      padding: 20px;
+      padding-bottom: 100px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-radius: 25px;
+      padding: 35px;
+      margin: 20px 0;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 0.6s ease;
+      border: 3px solid rgba(255, 153, 51, 0.3);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-size: 3em;
+      background: linear-gradient(135deg, #ff4d4d, #ff9933);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: 2em;
+      background: linear-gradient(135deg, #ff9933, #ffd633);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .content-text {
+      color: #555;
+      line-height: 1.8;
+      font-size: 1.05em;
+      text-align: justify;
+      margin-bottom: 20px;
+    }
+
+    .quote-box {
+      background: linear-gradient(135deg, rgba(255, 153, 51, 0.15), rgba(255, 215, 51, 0.2));
+      border-left: 6px solid #ff9933;
+      padding: 25px;
+      border-radius: 15px;
+      margin: 25px 0;
+      font-style: italic;
+      color: #444;
+      font-size: 1.15em;
+      box-shadow: 0 5px 20px rgba(255, 153, 51, 0.2);
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-around;
+      padding: 15px 0;
+      box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.15);
+      z-index: 1000;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      color: #666;
+      text-decoration: none;
+      font-size: 0.85em;
+      transition: all 0.3s;
+      padding: 5px 15px;
+      border-radius: 12px;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      background: rgba(255, 153, 51, 0.1);
+      color: #ff9933;
+    }
+
+    .nav-symbol {
+      font-size: 1.8em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>☀ MANAS FLOW</h1>
+      <p style="font-style:italic; color:#666;">Awaken. Align. Flow again.</p>
+    </div>
+
+    <div id="aboutContainer"></div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="tools.html" class="nav-item">
+      <div class="nav-symbol">✦</div>
+      <div>Tools</div>
+    </a>
+    <a href="challenges.html" class="nav-item">
+      <div class="nav-symbol">⚙</div>
+      <div>Challenges</div>
+    </a>
+    <a href="about.html" class="nav-item active">
+      <div class="nav-symbol">☀</div>
+      <div>About</div>
+    </a>
+    <a href="index.html" class="nav-item">
+      <div class="nav-symbol">❖</div>
+      <div>Home</div>
+    </a>
+    <a href="index.html" class="nav-item">
+      <div class="nav-symbol">⤴</div>
+      <div>Logout</div>
+    </a>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+    import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB-8F4Ja6iWJNCli6OqnyuvRScXI5MHVkk",
+      authDomain: "useful-life.firebaseapp.com",
+      databaseURL: "https://useful-life-default-rtdb.firebaseio.com",
+      projectId: "useful-life",
+      storageBucket: "useful-life.firebasestorage.app",
+      messagingSenderId: "598259358855",
+      appId: "1:598259358855:web:080fb89d7bda4788802c22"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = 'index.html';
+        return;
+      }
+      loadAbout();
+    });
+
+    function loadAbout() {
+      const aboutRef = ref(db, 'admin/about');
+      onValue(aboutRef, (snapshot) => {
+        const container = document.getElementById('aboutContainer');
+        container.innerHTML = '';
+
+        if (!snapshot.exists()) {
+          container.innerHTML = '<div class="glass-card"><p style="text-align:center;color:#666;">About content will be available soon</p></div>';
+          return;
+        }
+
+        const data = snapshot.val();
+
+        if (data.mission) {
+          const card = document.createElement('div');
+          card.className = 'glass-card';
+          card.innerHTML = `
+            <h2 class="section-title">✦ Our Mission</h2>
+            <p class="content-text">${escapeHtml(data.mission)}</p>
+          `;
+          container.appendChild(card);
+        }
+
+        if (data.vision) {
+          const card = document.createElement('div');
+          card.className = 'glass-card';
+          card.innerHTML = `
+            <h2 class="section-title">☀ Our Vision</h2>
+            <p class="content-text">${escapeHtml(data.vision)}</p>
+          `;
+          container.appendChild(card);
+        }
+
+        if (data.founder) {
+          const card = document.createElement('div');
+          card.className = 'glass-card';
+          card.innerHTML = `
+            <h2 class="section-title">✍ Founder's Message</h2>
+            <p class="content-text">${escapeHtml(data.founder)}</p>
+          `;
+          container.appendChild(card);
+        }
+
+        if (data.philosophy) {
+          const card = document.createElement('div');
+          card.className = 'glass-card';
+          card.innerHTML = `
+            <h2 class="section-title">♻ Flow Philosophy</h2>
+            <div class="quote-box">"${escapeHtml(data.philosophy)}"</div>
+          `;
+          container.appendChild(card);
+        }
+      });
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>

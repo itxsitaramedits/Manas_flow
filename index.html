@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manas Flow - Awaken. Align. Flow again.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff4d4d, #ff9933, #ffd633, #66cc66);
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding-bottom: 100px;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-radius: 25px;
+      padding: 30px;
+      margin: 20px 0;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .logo h1 {
+      font-size: 3em;
+      background: linear-gradient(135deg, #ff4d4d, #ff9933);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .tagline {
+      text-align: center;
+      color: #666;
+      font-size: 1.1em;
+      margin-bottom: 30px;
+      font-style: italic;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      background: rgba(255, 77, 77, 0.15);
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s;
+      color: #ff4d4d;
+    }
+
+    .tab.active {
+      background: linear-gradient(135deg, #ff4d4d, #ff9933);
+      color: white;
+      box-shadow: 0 5px 20px rgba(255, 77, 77, 0.4);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+      font-size: 0.95em;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid rgba(255, 77, 77, 0.2);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 16px;
+      transition: all 0.3s;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #ff9933;
+      box-shadow: 0 0 20px rgba(255, 153, 51, 0.3);
+      background: white;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #ff9933, #ffd633);
+      color: #333;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+      box-shadow: 0 8px 25px rgba(255, 153, 51, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(255, 153, 51, 0.5);
+    }
+
+    .error, .success {
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      display: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .error {
+      background: rgba(255, 77, 77, 0.15);
+      color: #c33;
+      border-left: 4px solid #ff4d4d;
+    }
+
+    .success {
+      background: rgba(102, 204, 102, 0.15);
+      color: #2a7;
+      border-left: 4px solid #66cc66;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .quote-box {
+      background: linear-gradient(135deg, rgba(255, 77, 77, 0.1), rgba(255, 215, 51, 0.1));
+      border-left: 5px solid #ff9933;
+      padding: 20px;
+      border-radius: 15px;
+      margin: 20px 0;
+      font-style: italic;
+      color: #555;
+      font-size: 1.05em;
+    }
+
+    .quote-author {
+      text-align: right;
+      margin-top: 10px;
+      font-weight: 600;
+      color: #ff9933;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin: 25px 0;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, rgba(255, 153, 51, 0.1), rgba(255, 215, 51, 0.15));
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      border: 2px solid rgba(255, 153, 51, 0.3);
+    }
+
+    .stat-number {
+      font-size: 2.5em;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ff9933, #ffd633);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat-label {
+      color: #666;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 5px solid #ff9933;
+      margin: 0 auto 20px;
+      display: block;
+      box-shadow: 0 10px 30px rgba(255, 153, 51, 0.4);
+    }
+
+    .profile-name {
+      text-align: center;
+      font-size: 2em;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ff4d4d, #ff9933);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 5px;
+    }
+
+    .profile-email {
+      text-align: center;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-around;
+      padding: 15px 0;
+      box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.15);
+      z-index: 1000;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      color: #666;
+      text-decoration: none;
+      font-size: 0.85em;
+      transition: all 0.3s;
+      padding: 5px 15px;
+      border-radius: 12px;
+    }
+
+    .nav-item:hover {
+      background: rgba(255, 153, 51, 0.1);
+      color: #ff9933;
+    }
+
+    .nav-symbol {
+      font-size: 1.8em;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 25px;
+      background: rgba(255, 153, 51, 0.2);
+      border-radius: 15px;
+      overflow: hidden;
+      margin: 15px 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff9933, #ffd633, #66cc66);
+      transition: width 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+      font-weight: 600;
+      font-size: 0.85em;
+    }
+
+    .notification-badge {
+      background: linear-gradient(135deg, #ff4d4d, #ff9933);
+      padding: 12px 20px;
+      border-radius: 12px;
+      margin: 15px 0;
+      color: white;
+      font-weight: 500;
+      box-shadow: 0 5px 15px rgba(255, 77, 77, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .logo h1 {
+        font-size: 2.2em;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-item {
+        font-size: 0.75em;
+        padding: 5px 8px;
+      }
+
+      .nav-symbol {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Auth Section (Login/Signup) -->
+    <div id="authSection">
+      <div class="glass-card">
+        <div class="logo">
+          <h1>✦ MANAS FLOW</h1>
+        </div>
+        <p class="tagline">Awaken. Align. Flow again.</p>
+
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab('login')">Login</button>
+          <button class="tab" onclick="switchTab('signup')">Sign Up</button>
+        </div>
+
+        <div id="authError" class="error"></div>
+        <div id="authSuccess" class="success"></div>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="loginEmail" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="loginPassword" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn">✦ Enter Flow</button>
+        </form>
+
+        <!-- Signup Form -->
+        <form id="signupForm" class="hidden">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="signupName" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="signupEmail" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="signupPassword" placeholder="Min 6 characters" required>
+          </div>
+          <button type="submit" class="btn">☀ Begin Journey</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Home Section (After Login) -->
+    <div id="homeSection" class="hidden">
+      <div class="glass-card">
+        <div class="logo">
+          <h1>✦ MANAS FLOW</h1>
+        </div>
+        <p class="tagline">Awaken. Align. Flow again.</p>
+
+        <div id="notificationArea"></div>
+
+        <div id="quoteBox" class="quote-box">
+          <div id="quoteText">Loading wisdom...</div>
+          <div id="quoteAuthor" class="quote-author"></div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number" id="streakCount">0</div>
+            <div class="stat-label">Day Streak ✦</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="rewardPoints">0</div>
+            <div class="stat-label">Flow Points ☀</div>
+          </div>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressBar" style="width: 0%">0%</div>
+        </div>
+      </div>
+
+      <!-- Profile Section -->
+      <div class="glass-card">
+        <img id="profileAvatar" class="profile-avatar" src="" alt="Profile">
+        <div class="profile-name" id="profileName">User</div>
+        <div class="profile-email" id="profileEmail">user@email.com</div>
+
+        <div class="form-group">
+          <label>Update Name</label>
+          <input type="text" id="updateName" placeholder="New name">
+        </div>
+        <div class="form-group">
+          <label>Update Photo URL</label>
+          <input type="url" id="updatePhoto" placeholder="https://...">
+        </div>
+        <button class="btn" onclick="updateProfile()">♻ Update Profile</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <div id="bottomNav" class="bottom-nav hidden">
+    <a href="tools.html" class="nav-item">
+      <div class="nav-symbol">✦</div>
+      <div>Tools</div>
+    </a>
+    <a href="challenges.html" class="nav-item">
+      <div class="nav-symbol">⚙</div>
+      <div>Challenges</div>
+    </a>
+    <a href="about.html" class="nav-item">
+      <div class="nav-symbol">☀</div>
+      <div>About</div>
+    </a>
+    <a href="index.html" class="nav-item">
+      <div class="nav-symbol">❖</div>
+      <div>Home</div>
+    </a>
+    <a href="#" class="nav-item" onclick="logout(); return false;">
+      <div class="nav-symbol">⤴</div>
+      <div>Logout</div>
+    </a>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+    import { getDatabase, ref, set, get, update, onValue } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB-8F4Ja6iWJNCli6OqnyuvRScXI5MHVkk",
+      authDomain: "useful-life.firebaseapp.com",
+      databaseURL: "https://useful-life-default-rtdb.firebaseio.com",
+      projectId: "useful-life",
+      storageBucket: "useful-life.firebasestorage.app",
+      messagingSenderId: "598259358855",
+      appId: "1:598259358855:web:080fb89d7bda4788802c22"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    let currentUser = null;
+
+    // Tab switching
+    window.switchTab = (tab) => {
+      const loginForm = document.getElementById('loginForm');
+      const signupForm = document.getElementById('signupForm');
+      const tabs = document.querySelectorAll('.tab');
+
+      tabs.forEach(t => t.classList.remove('active'));
+
+      if (tab === 'login') {
+        loginForm.classList.remove('hidden');
+        signupForm.classList.add('hidden');
+        tabs[0].classList.add('active');
+      } else {
+        loginForm.classList.add('hidden');
+        signupForm.classList.remove('hidden');
+        tabs[1].classList.add('active');
+      }
+    };
+
+    // Show message
+    function showMessage(type, message) {
+      const errorDiv = document.getElementById('authError');
+      const successDiv = document.getElementById('authSuccess');
+
+      if (type === 'error') {
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
+        setTimeout(() => errorDiv.style.display = 'none', 5000);
+      } else {
+        successDiv.textContent = message;
+        successDiv.style.display = 'block';
+        setTimeout(() => successDiv.style.display = 'none', 3000);
+      }
+    }
+
+    // Login
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        showMessage('success', 'Welcome to Flow!');
+      } catch (error) {
+        showMessage('error', error.message);
+      }
+    });
+
+    // Signup
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('signupName').value.trim();
+      const email = document.getElementById('signupEmail').value.trim();
+      const password = document.getElementById('signupPassword').value;
+
+      if (password.length < 6) {
+        showMessage('error', 'Password must be at least 6 characters');
+        return;
+      }
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        await set(ref(db, `users/${user.uid}`), {
+          name: name,
+          email: email,
+          photoURL: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=ff9933&color=fff&size=200`,
+          joinedAt: new Date().toISOString(),
+          streak: 0,
+          rewards: 0,
+          progress: 0
+        });
+
+        showMessage('success', 'Account created! Welcome to Flow!');
+      } catch (error) {
+        showMessage('error', error.message);
+      }
+    });
+
+    // Auth state change
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        currentUser = user;
+        document.getElementById('authSection').classList.add('hidden');
+        document.getElementById('homeSection').classList.remove('hidden');
+        document.getElementById('bottomNav').classList.remove('hidden');
+        await loadUserData();
+        loadQuotes();
+        loadNotifications();
+      } else {
+        document.getElementById('authSection').classList.remove('hidden');
+        document.getElementById('homeSection').classList.add('hidden');
+        document.getElementById('bottomNav').classList.add('hidden');
+      }
+    });
+
+    // Load user data
+    async function loadUserData() {
+      const userRef = ref(db, `users/${currentUser.uid}`);
+      const snapshot = await get(userRef);
+
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        document.getElementById('profileName').textContent = data.name;
+        document.getElementById('profileEmail').textContent = data.email;
+        document.getElementById('profileAvatar').src = data.photoURL;
+        document.getElementById('updateName').value = data.name;
+        document.getElementById('updatePhoto').value = data.photoURL;
+        document.getElementById('streakCount').textContent = data.streak || 0;
+        document.getElementById('rewardPoints').textContent = data.rewards || 0;
+        
+        const progress = data.progress || 0;
+        document.getElementById('progressBar').style.width = progress + '%';
+        document.getElementById('progressBar').textContent = progress + '%';
+      }
+    }
+
+    // Load quotes
+    function loadQuotes() {
+      const quotesRef = ref(db, 'admin/quotes');
+      onValue(quotesRef, (snapshot) => {
+        if (snapshot.exists()) {
+          const quotes = Object.values(snapshot.val());
+          if (quotes.length > 0) {
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('quoteText').textContent = `"${randomQuote.text}"`;
+            document.getElementById('quoteAuthor').textContent = `— ${randomQuote.author}`;
+          }
+        }
+      });
+    }
+
+    // Load notifications
+    function loadNotifications() {
+      const notifRef = ref(db, 'admin/notifications');
+      onValue(notifRef, (snapshot) => {
+        const notifArea = document.getElementById('notificationArea');
+        notifArea.innerHTML = '';
+
+        if (snapshot.exists()) {
+          const notifications = Object.values(snapshot.val());
+          notifications.forEach(notif => {
+            const div = document.createElement('div');
+            div.className = 'notification-badge';
+            div.textContent = notif.message;
+            notifArea.appendChild(div);
+          });
+        }
+      });
+    }
+
+    // Update profile
+    window.updateProfile = async () => {
+      const newName = document.getElementById('updateName').value.trim();
+      const newPhoto = document.getElementById('updatePhoto').value.trim();
+
+      if (!newName) {
+        alert('Name cannot be empty');
+        return;
+      }
+
+      try {
+        await update(ref(db, `users/${currentUser.uid}`), {
+          name: newName,
+          photoURL: newPhoto || `https://ui-avatars.com/api/?name=${encodeURIComponent(newName)}&background=ff9933&color=fff&size=200`
+        });
+
+        alert('✦ Profile updated successfully!');
+        await loadUserData();
+      } catch (error) {
+        alert('Error: ' + error.message);
+      }
+    };
+
+    // Logout
+    window.logout = async () => {
+      if (confirm('Are you sure you want to logout?')) {
+        await signOut(auth);
+      }
+    };
+  </script>
+</body>
+</html>

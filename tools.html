@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools - Manas Flow</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff4d4d, #ff9933, #ffd633, #66cc66);
+      min-height: 100vh;
+      padding: 20px;
+      padding-bottom: 100px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-radius: 25px;
+      padding: 30px;
+      margin: 20px 0;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-size: 2.5em;
+      background: linear-gradient(135deg, #ff4d4d, #ff9933);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-size: 1.8em;
+      background: linear-gradient(135deg, #ff9933, #ffd633);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .counter-display {
+      text-align: center;
+      font-size: 5em;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ff9933, #ffd633);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 30px 0;
+    }
+
+    .counter-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 25px;
+    }
+
+    .btn {
+      padding: 15px 35px;
+      border: none;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #ff9933, #ffd633);
+      color: #333;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 8px 25px rgba(255, 153, 51, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(255, 153, 51, 0.5);
+    }
+
+    .btn-reset {
+      background: linear-gradient(135deg, #ff4d4d, #ff9933);
+      color: white;
+    }
+
+    .mantra-card {
+      background: linear-gradient(135deg, rgba(255, 153, 51, 0.1), rgba(255, 215, 51, 0.15));
+      padding: 20px;
+      border-radius: 15px;
+      margin: 15px 0;
+      border-left: 5px solid #ff9933;
+      transition: all 0.3s;
+    }
+
+    .mantra-card:hover {
+      transform: translateX(5px);
+      box-shadow: 0 10px 30px rgba(255, 153, 51, 0.3);
+      border-left-width: 8px;
+    }
+
+    .mantra-name {
+      font-size: 1.4em;
+      font-weight: 700;
+      color: #ff4d4d;
+      margin-bottom: 10px;
+    }
+
+    .mantra-text {
+      font-style: italic;
+      color: #555;
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    .yoga-card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 25px;
+      border-radius: 20px;
+      margin: 20px 0;
+      border: 3px solid rgba(255, 153, 51, 0.3);
+      transition: all 0.3s;
+    }
+
+    .yoga-card:hover {
+      border-color: #ff9933;
+      box-shadow: 0 15px 40px rgba(255, 153, 51, 0.4);
+    }
+
+    .yoga-name {
+      font-size: 1.6em;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ff9933, #ffd633);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .yoga-desc {
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .yoga-images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .yoga-images img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+    }
+
+    .yoga-images img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(255, 153, 51, 0.4);
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-around;
+      padding: 15px 0;
+      box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.15);
+      z-index: 1000;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      color: #666;
+      text-decoration: none;
+      font-size: 0.85em;
+      transition: all 0.3s;
+      padding: 5px 15px;
+      border-radius: 12px;
+    }
+
+    .nav-item:hover, .nav-item.active {
+      background: rgba(255, 153, 51, 0.1);
+      color: #ff9933;
+    }
+
+    .nav-symbol {
+      font-size: 1.8em;
+    }
+
+    @media (max-width: 768px) {
+      .counter-display {
+        font-size: 3.5em;
+      }
+
+      .counter-buttons {
+        flex-direction: column;
+      }
+
+      .yoga-images {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>✦ Tools for Flow</h1>
+    </div>
+
+    <!-- Mantra Counter -->
+    <div class="glass-card">
+      <h2 class="section-title">✍ Mantra Counter</h2>
+      <div class="counter-display" id="counterDisplay">0</div>
+      <div class="counter-buttons">
+        <button class="btn" onclick="incrementCounter()">+1 Mantra</button>
+        <button class="btn" onclick="addTen()">+10</button>
+        <button class="btn btn-reset" onclick="resetCounter()">Reset</button>
+      </div>
+    </div>
+
+    <!-- Mantras Library -->
+    <div class="glass-card">
+      <h2 class="section-title">☀ Mantras Library</h2>
+      <div id="mantrasContainer"></div>
+    </div>
+
+    <!-- Yoga Library -->
+    <div class="glass-card">
+      <h2 class="section-title">♻ Yoga Asanas</h2>
+      <div id="yogaContainer"></div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="tools.html" class="nav-item active">
+      <div class="nav-symbol">✦</div>
+      <div>Tools</div>
+    </a>
+    <a href="challenges.html" class="nav-item">
+      <div class="nav-symbol">⚙</div>
+      <div>Challenges</div>
+    </a>
+    <a href="about.html" class="nav-item">
+      <div class="nav-symbol">☀</div>
+      <div>About</div>
+    </a>
+    <a href="index.html" class="nav-item">
+      <div class="nav-symbol">❖</div>
+      <div>Home</div>
+    </a>
+    <a href="index.html" class="nav-item">
+      <div class="nav-symbol">⤴</div>
+      <div>Logout</div>
+    </a>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+    import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+    import { getDatabase, ref, set, get, onValue } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB-8F4Ja6iWJNCli6OqnyuvRScXI5MHVkk",
+      authDomain: "useful-life.firebaseapp.com",
+      databaseURL: "https://useful-life-default-rtdb.firebaseio.com",
+      projectId: "useful-life",
+      storageBucket: "useful-life.firebasestorage.app",
+      messagingSenderId: "598259358855",
+      appId: "1:598259358855:web:080fb89d7bda4788802c22"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    let currentUser = null;
+    let mantraCount = 0;
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = 'index.html';
+        return;
+      }
+      currentUser = user;
+      await loadMantraCounter();
+      loadMantras();
+      loadYoga();
+    });
+
+    // Load mantra counter
+    async function loadMantraCounter() {
+      const counterRef = ref(db, `users/${currentUser.uid}/tools/mantraCounter`);
+      const snapshot = await get(counterRef);
+      mantraCount = snapshot.exists() ? snapshot.val() : 0;
+      document.getElementById('counterDisplay').textContent = mantraCount;
+    }
+
+    // Increment counter
+    window.incrementCounter = async () => {
+      mantraCount++;
+      document.getElementById('counterDisplay').textContent = mantraCount;
+      await set(ref(db, `users/${currentUser.uid}/tools/mantraCounter`), mantraCount);
+    };
+
+    // Add ten
+    window.addTen = async () => {
+      mantraCount += 10;
+      document.getElementById('counterDisplay').textContent = mantraCount;
+      await set(ref(db, `users/${currentUser.uid}/tools/mantraCounter`), mantraCount);
+    };
+
+    // Reset counter
+    window.resetCounter = async () => {
+      if (confirm('Reset counter to 0?')) {
+        mantraCount = 0;
+        document.getElementById('counterDisplay').textContent = mantraCount;
+        await set(ref(db, `users/${currentUser.uid}/tools/mantraCounter`), mantraCount);
+      }
+    };
+
+    // Load mantras
+    function loadMantras() {
+      const mantrasRef = ref(db, 'admin/mantras');
+      onValue(mantrasRef, (snapshot) => {
+        const container = document.getElementById('mantrasContainer');
+        container.innerHTML = '';
+
+        if (!snapshot.exists()) {
+          container.innerHTML = '<p style="text-align:center;color:#666;">No mantras available yet</p>';
+          return;
+        }
+
+        const mantras = snapshot.val();
+        Object.values(mantras).forEach(mantra => {
+          const card = document.createElement('div');
+          card.className = 'mantra-card';
+          card.innerHTML = `
+            <div class="mantra-name">${escapeHtml(mantra.name)}</div>
+            <div class="mantra-text">"${escapeHtml(mantra.text)}"</div>
+          `;
+          container.appendChild(card);
+        });
+      });
+    }
+
+    // Load yoga
+    function loadYoga() {
+      const yogaRef = ref(db, 'admin/yoga');
+      onValue(yogaRef, (snapshot) => {
+        const container = document.getElementById('yogaContainer');
+        container.innerHTML = '';
+
+        if (!snapshot.exists()) {
+          container.innerHTML = '<p style="text-align:center;color:#666;">No yoga poses available yet</p>';
+          return;
+        }
+
+        const yogaPoses = snapshot.val();
+        Object.values(yogaPoses).forEach(pose => {
+          const card = document.createElement('div');
+          card.className = 'yoga-card';
+          
+          let imagesHTML = '';
+          if (pose.images && pose.images.length > 0) {
+            imagesHTML = '<div class="yoga-images">';
+            pose.images.forEach(imgUrl => {
+              if (imgUrl) imagesHTML += `<img src="${escapeHtml(imgUrl)}" alt="${escapeHtml(pose.name)}">`;
+            });
+            imagesHTML += '</div>';
+          }
+
+          card.innerHTML = `
+            <div class="yoga-name">${escapeHtml(pose.name)}</div>
+            <div class="yoga-desc">${escapeHtml(pose.description)}</div>
+            ${imagesHTML}
+          `;
+          container.appendChild(card);
+        });
+      });
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>
